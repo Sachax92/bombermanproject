@@ -1,0 +1,42 @@
+import pygame, time, sys
+pygame.init()
+
+ecran=pygame.display.set_mode((800, 650))
+dirt = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/dirt.png").convert_alpha()
+box = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/box.png").convert_alpha()
+
+carte = [[2,1,1,2,1,1,2,1,1,1,1,1,1],
+[2,2,2,2,2,2,2,1,1,1,1,1,1],
+[2,1,1,2,1,1,2,1,1,1,1,1,1],
+[2,1,1,2,1,1,2,1,2,1,1,1,1],
+[2,1,1,2,1,1,2,1,1,1,1,1,1],
+[2,1,1,2,1,1,2,1,2,2,1,1,1],
+[2,1,1,2,1,1,2,1,1,1,1,1,1],
+[2,1,1,2,1,1,2,1,1,1,1,1,1],
+[2,1,1,2,1,1,2,1,1,1,2,2,1],
+[2,1,1,2,1,1,2,1,1,1,2,2,1]]
+
+
+while True:
+    indice1 = 0
+    ecran.fill(pygame.Color("#ED8148"))
+    for ligne in carte:
+        indice2 = 0
+        for j in ligne:
+            if j == 1:
+                terre = dirt.get_rect()
+                terre.x = indice2*64
+                terre.y = indice1*64
+                ecran.blit(dirt, terre)
+            if j == 2:
+                boite = box.get_rect()
+                boite.x = indice2*64
+                boite.y = indice1*64
+                ecran.blit(box, boite)
+            indice2 += 1
+        indice1 += 1
+
+    pygame.display.update()
+    for evenement in pygame.event.get():
+        if evenement.type == pygame.QUIT:
+            sys.exit(0)
