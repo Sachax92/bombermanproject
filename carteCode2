@@ -20,7 +20,7 @@ carte = [[2,1,1,2,1,1,2,1,1,1,1,1,1],
 
 while True:
     indice1 = 0
-    ecran.fill(pygame.Color("#ae7640"))
+    ecran.fill(pygame.Color("#bd8958"))
     for ligne in carte:
         indice2 = 0
         for j in ligne:
