@@ -5,15 +5,15 @@ ecran=pygame.display.set_mode((800, 650))
 dirt = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/dirt.png").convert_alpha()
 box = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/box.png").convert_alpha()
 
-carte = [[2,1,1,2,1,1,2,1,1,1,1,1],
-[2,2,2,2,2,2,2,1,1,1,1,1],
-[2,1,1,2,1,1,2,1,1,1,1,1],
-[2,1,1,2,1,1,2,1,1,1,1,1],
-[2,1,1,2,1,1,2,1,1,1,1,1],
-[2,1,1,2,1,1,2,1,1,1,1,1],
-[2,1,1,2,1,1,2,1,1,1,1,1],
-[2,1,1,2,1,1,2,1,1,1,1,1],
-[2,1,1,2,1,1,2,1,1,1,1,1]]
+carte = [[3,3,3,3,3,3,3,3,3,3,3,3],
+[3,2,2,2,2,2,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,3,3,3,3,3,3,3,3,3,3,3]]
 
 while True:
     ecran.fill(pygame.Color("#ED8148"))
