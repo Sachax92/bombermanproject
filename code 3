@@ -7,6 +7,7 @@ ecran=pygame.display.set_mode((768,576))
 dirt = pygame.image.load("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\projet info\\Dirt.png").convert_alpha()
 box = pygame.image.load("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\projet info\\Box.png").convert_alpha()
 bloc = pygame.image.load("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\projet info\\Bloc.png").convert_alpha()
+pinguin = pygame.image.load("/Users/oscar/Desktop/Bomberman/pinguin.png").convert_alpha()
 
 carte = [[3,3,3,3,3,3,3,3,3,3,3,3],
 [3,2,2,2,2,2,2,1,1,1,1,3],
@@ -18,7 +19,7 @@ carte = [[3,3,3,3,3,3,3,3,3,3,3,3],
 [3,1,1,2,1,1,2,1,1,1,1,3],
 [3,3,3,3,3,3,3,3,3,3,3,3]]
 
-
+indA, indO = 300, 50
 while True:
     indice1 = 0
     ecran.fill(pygame.Color("#ae7640"))
@@ -43,6 +44,21 @@ while True:
                 ecran.blit(bloc, bord)
             indice2 += 1
         indice1 += 1
+        
+        touches = pygame.key.get_pressed()    
+    if touches[pygame.K_RIGHT] == 1 :
+        indA += 1
+    if touches[pygame.K_LEFT] == 1 :
+        indA -= 1
+    if touches[pygame.K_UP] == 1 :
+        indO -= 1
+    if touches[pygame.K_DOWN] == 1 :
+        indO += 1
+    pge = pinguin.get_rect()
+    pge.x = indA
+    pge.y = indO
+    ecran.blit(pinguin, pge)
+    
     pygame.display.update()
     for evenement in pygame.event.get():
         if evenement.type == pygame.QUIT:
