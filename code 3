@@ -1,0 +1,49 @@
+#import os
+#os.chdir("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\")
+import pygame, time, sys
+pygame.init()
+
+ecran=pygame.display.set_mode((768,576))
+dirt = pygame.image.load("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\projet info\\Dirt.png").convert_alpha()
+box = pygame.image.load("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\projet info\\Box.png").convert_alpha()
+bloc = pygame.image.load("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\projet info\\Bloc.png").convert_alpha()
+
+carte = [[3,3,3,3,3,3,3,3,3,3,3,3],
+[3,2,2,2,2,2,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,3,3,3,3,3,3,3,3,3,3,3]]
+
+
+while True:
+    indice1 = 0
+    ecran.fill(pygame.Color("#ae7640"))
+    ecran.fill(pygame.Color("#bd8958"))
+    for ligne in carte:
+        indice2 = 0
+        for j in ligne:
+            if j == 1:
+                terre = dirt.get_rect()
+                terre.x = indice2*64
+                terre.y = indice1*64
+                ecran.blit(dirt, terre)
+            if j == 2:
+                boite = box.get_rect()
+                boite.x = indice2*64
+                boite.y = indice1*64
+                ecran.blit(box, boite)
+            if j == 3:
+                bord=bloc.get_rect()
+                bord.x = indice2*64
+                bord.y = indice1*64
+                ecran.blit(bloc, bord)
+            indice2 += 1
+        indice1 += 1
+    pygame.display.update()
+    for evenement in pygame.event.get():
+        if evenement.type == pygame.QUIT:
+            sys.exit(0)
