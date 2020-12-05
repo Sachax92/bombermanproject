@@ -4,18 +4,17 @@ pygame.init()
 ecran=pygame.display.set_mode((800, 650))
 dirt = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/dirt.png").convert_alpha()
 box = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/box.png").convert_alpha()
+#bloc = pygame.image.load("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\projet info\\Bloc.png").convert_alpha()
 
-carte = [[2,1,1,2,1,1,2,1,1,1,1,1,1],
-[2,1,1,2,1,2,1,1,1,1,1,1,1],
-[1,1,1,1,1,1,2,1,1,1,1,1,1],
-[1,1,1,2,1,1,2,1,2,1,1,1,1],
-[2,1,1,1,1,1,2,1,1,1,1,1,1],
-[1,1,1,2,1,1,1,1,2,2,1,1,1],
-[1,1,1,2,1,1,1,1,1,1,1,1,1],
-[1,1,1,1,1,1,2,1,1,1,1,1,1],
-[1,1,1,2,1,1,2,1,1,1,1,2,1],
-[2,1,1,2,1,1,2,1,1,1,1,2,1],
-[1,1,1,1,1,1,1,1,1,1,1,1,1]]
+carte = [[3,3,3,3,3,3,3,3,3,3,3,3],
+[3,2,2,2,2,2,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,3,3,3,3,3,3,3,3,3,3,3]]
 
 
 while True:
@@ -34,6 +33,11 @@ while True:
                 boite.x = indice2*64
                 boite.y = indice1*64
                 ecran.blit(box, boite)
+            if j == 3:
+                bord=bloc.get_rect()
+                bord.x = indice2*64
+                bord.y = indice1*64
+                ecran.blit(bloc, bord)
             indice2 += 1
         indice1 += 1
 
