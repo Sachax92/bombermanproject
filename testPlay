@@ -10,6 +10,7 @@ bloc = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2
 logo = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/ecran acceuil/logobomber.png").convert_alpha()
 #redimension de la taille du logo
 logo = pygame.transform.scale(logo, (640,450))
+#importation du bouton play
 bouton_play = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/ecran acceuil/game-buttons.png").convert_alpha()
 bouton_play = pygame.transform.scale(bouton_play, (146,57))
 bouton_play_rectangle = bouton_play.get_rect()
@@ -157,7 +158,6 @@ while True:
             ecran.blit(logo, (65,0))
             ecran.blit(bouton_play, bouton_play_rectangle)
     #si clic de souris
-
 
     pygame.display.update()
 
