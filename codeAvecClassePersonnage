@@ -1,0 +1,150 @@
+import pygame, time, sys
+pygame.init()
+
+ecran = pygame.display.set_mode((768,576))
+dirt = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/dirt.png").convert_alpha()
+box = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/box.png").convert_alpha()
+bloc = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/terrain/boxItem.png").convert_alpha()
+
+#création d'une classe qui correspond au jeu
+class Game:
+    def __init__(self):
+        #chargement du personnage
+        self.perso = Perso()
+
+#création de la classe du personnage
+class Perso(pygame.sprite.Sprite):
+
+    def __init__(self, n=1, s=1, p=1, r=3, t=False, v=1):
+        #intitiation super classe Sprite
+        super().__init__()
+        self.nbbombemax = n
+        self.nbbombeleft = s
+        self.portée = p
+        self.rebours = r
+        self.transpercer = t
+        self.vitesse = v
+        #chargement de l'image associée au personnage
+        self.image = pygame.image.load("/Users/mohamedbouabdallah/Documents/cpes 2/cours/info2/projet Bomberman/sprites/personnage/tux.png").convert_alpha()
+        self.rectangle = self.image.get_rect()
+        #coordonnées du personnage sur l'écran
+        self.rectangle.x = 200
+        self.rectangle.y = 200
+
+    #création des méthodes de déplacement
+    def deplacement_droite(self):
+        self.rectangle.x += self.vitesse
+    def deplacement_gauche(self):
+        self.rectangle.x -= self.vitesse
+    def deplacement_haut(self):
+        self.rectangle.y -= self.vitesse
+    def deplacement_bas(self):
+        self.rectangle.y += self.vitesse
+
+#chargement du jeu
+game = Game()
+
+#création de la map du jeu
+carte = [[3,3,3,3,3,3,3,3,3,3,3,3],
+[3,2,2,2,2,2,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,1,1,2,1,1,2,1,1,1,1,3],
+[3,3,3,3,3,3,3,3,3,3,3,3]]
+
+#liste des solides que le personnage ne doit pas pouvoir traverser
+solides = []
+indice1 = 0
+for ligne in carte:
+    indice2 = 0
+    for j in ligne:
+        if j == 3:
+            solides += [pygame.Rect(indice2*64, indice1*64, 64, 64)]
+        indice2 += 1
+    indice1 += 1
+
+#boucle de jeu
+while True:
+    #affichage de la map du jeu
+    indice1 = 0
+    ecran.fill(pygame.Color("#ae7640"))
+    ecran.fill(pygame.Color("#bd8958"))
+    for ligne in carte:
+        indice2 = 0
+        for j in ligne:
+            if j == 1:
+                terre = dirt.get_rect()
+                terre.x = indice2*64
+                terre.y = indice1*64
+                ecran.blit(dirt, terre)
+            if j == 2:
+                boite = box.get_rect()
+                boite.x = indice2*64
+                boite.y = indice1*64
+                ecran.blit(box, boite)
+            if j == 3:
+                bord=bloc.get_rect()
+                bord.x = indice2*64
+                bord.y = indice1*64
+                ecran.blit(bloc, bord)
+            indice2 += 1
+        indice1 += 1
+
+    #déplacements du perso
+    touches = pygame.key.get_pressed()    
+    if touches[pygame.K_d] == 1 :
+        game.perso.deplacement_droite()
+        #gestion des collisions
+        possible = True
+        for objet in solides:
+            if game.perso.rectangle.colliderect(objet) == True:
+                possible = False
+        if possible == False:
+            game.perso.deplacement_gauche()
+    if touches[pygame.K_q] == 1 :
+        game.perso.deplacement_gauche()
+        #gestion des collisions
+        possible = True
+        for objet in solides:
+            if game.perso.rectangle.colliderect(objet) == True:
+                possible = False
+        if possible == False:
+            game.perso.deplacement_droite()
+    if touches[pygame.K_z] == 1 :
+        game.perso.deplacement_haut()
+        #gestion des collisions
+        possible = True
+        for objet in solides:
+            if game.perso.rectangle.colliderect(objet) == True:
+                possible = False
+        if possible == False:
+            game.perso.deplacement_bas()
+    if touches[pygame.K_s] == 1 :
+        game.perso.deplacement_bas()
+        #gestion des collisions
+        possible = True
+        for objet in solides:
+            if game.perso.rectangle.colliderect(objet) == True:
+                possible = False
+        if possible == False:
+            game.perso.deplacement_haut()
+
+    #affichage de l'image du personnage, le deuxième argument spécifie les coordonnées par rapport à l'écran (ici l'image se positionne par rapport à rectangle)
+    ecran.blit(game.perso.image, game.perso.rectangle)    
+        
+    pygame.display.update()
+    #fermer la fenêtre quand le joueur appuie sur la croix rouge
+    for evenement in pygame.event.get():
+        if evenement.type == pygame.QUIT: 
+            sys.exit(0)
+
+class bombe:
+    def __init__(p, r, t):
+        self.portée = 1
+        self.rebours = 3
+        self.transpercer = False
+#pas possible de poser 2 bombes dans la même case
+#nécessaire de centrer les bombes dans la case
