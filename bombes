@@ -1,0 +1,26 @@
+class bombe:
+        def __init__(self, p, r, t, x, y):
+            self.portée=p
+            self.rebours=r
+            self.transpercer=False
+            self.x=x
+            self.y=y
+            self.image = pygame.image.load("C:\\Users\\goran\\Documents\\Sacha travail CPES\\Python Scripts\\projet info\\bombe.png").convert_alpha()
+            self.image = pygame.transform.scale(self.image, (64,64))
+            self.rectanglebombe = self.image.get_rect()
+            self.rectanglebombe.x=self.x
+            self.rectanglebombe.y=self.y
+            #pas au bon edroit:
+            ecran.blit(self.image, self.rectanglebombe)
+
+#pas possible de poser 2 bombes dans la même case
+#nécessaire de centrer les bombes dans la case
+
+    #méthode pour poser les bombes !! à mettre dans la classe perso
+    def poser_bombe(self):
+        #if possibombe(self, self.rectangle.x, self.rectangle.y) == True
+            #à faire: redimensionner la bombe
+        xbombe = (self.rectangle.x // 64) * 64
+        ybombe = (self.rectangle.y // 64) * 64
+            #trouver un moyen de mettre nom différent
+        bombe=bombe(self.portée, self.rebours, self.transpercer, xbombe, ybombe )
